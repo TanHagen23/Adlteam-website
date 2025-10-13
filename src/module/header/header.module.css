@@ -1,0 +1,48 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: transparent;
+}
+
+.container {
+  height: 9.1rem;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+
+  background: #000;
+}
+
+.left {
+  padding: 3.4rem;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 9.1rem;
+  height: 4.3rem;
+  object-fit: contain;
+  border-radius: 4rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn {
+  color: #fff;
+  height: 2.1rem;
+  width: 5.1rem;
+  background: transparent;
+}
+
+.tgnumber {
+  color: #fff;
+}
