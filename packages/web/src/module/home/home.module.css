@@ -1,0 +1,618 @@
+/* ===== SECTION 1: HERO ===== */
+
+/* .hero {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(34rem, 82vh, 58rem);
+  background: transparent;
+} */
+
+.bg {
+  position: relative;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 60% 35%;
+  clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+  z-index: -1;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 6rem 1.5rem 7rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  position: absolute;
+  top: 20.5rem;
+  left: 12.2rem;
+  max-width: 720px;
+}
+
+.title_content {
+  color: #fff;
+  font-family: "Inter";
+  font-weight: 700;
+  line-height: 7.2rem;
+  font-size: clamp(2.2rem, 4.8vw, 4.25rem);
+}
+
+.more_info {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+}
+
+.heroBottom {
+  position: relative;
+  left: 0;
+  right: 0;
+  bottom: 8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.6rem;
+  padding: 0 1.8rem;
+  z-index: 1;
+}
+
+.navBtn {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: #fff;
+  opacity: 0.9;
+  font-size: 18px;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+.navBtn:hover {
+  opacity: 1;
+}
+
+.counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-left: 12.2rem;
+  justify-self: start;
+}
+
+.numActive {
+  color: #fff;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 2.1rem;
+}
+
+.numTotal {
+  color: #fff;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 2.1rem;
+}
+
+.progress {
+  width: 24rem;
+  height: 1px;
+  background: #58595b;
+  transform: translateY(1px);
+}
+
+.progress::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20%;
+  height: 100%;
+  background: #fff;
+}
+
+.discussLink {
+  justify-self: end;
+  color: #fff;
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin-right: 9.8rem;
+  display: inline-block;
+}
+
+.scrollHint {
+  position: absolute;
+  left: 50%;
+  width: 2rem;
+  height: 2.9rem;
+  border: 2.3px solid #fff;
+  border-radius: 10px;
+  display: grid;
+  place-items: start center;
+  opacity: 0.5;
+}
+
+.scrollDot {
+  width: 0.3rem;
+  height: 0.4rem;
+  background: #fff;
+  border-radius: 2px;
+  margin-top: 6px;
+  animation: scrollPulse 1.4s infinite;
+}
+
+/* ===== SECTION 2: SERVICES ===== */
+
+.services {
+  width: 100%;
+  height: 100%;
+  background: #373737;
+  padding-bottom: 20rem;
+}
+
+.services_header {
+  padding-top: 10rem;
+  padding-left: 17.8rem;
+}
+
+.services_title {
+  color: #fff;
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 3.5rem;
+  margin: 0;
+}
+
+.services_subtitle {
+  color: #58595b;
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 3.5rem;
+  margin: 0.5rem 0 3rem;
+}
+
+.services_grid {
+  list-style: none;
+  margin: 0;
+  padding-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 36rem);
+  justify-content: center;
+  gap: 5rem;
+}
+
+.card {
+  position: relative;
+  width: 36rem;
+  height: 35.6rem;
+  background: #292929;
+  border: 1px solid transparent;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+.card_title,
+.card_desc,
+.card_icon {
+  position: relative;
+  z-index: 2;
+}
+
+.card_overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("../../assets//images/wp7111933.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition:
+    opacity 0.4s ease,
+    transform 0.6 ease;
+  z-index: 1;
+}
+
+.card:hover .card_overlay {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card_icon {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #d6d9de44;
+  border-radius: 6px;
+  z-index: 3;
+  transition: border-color 0.3s ease;
+}
+
+.card_overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 200, 255, 0.6),
+    rgba(0, 255, 180, 0.4)
+  );
+  clip-path: polygon(100% 0, 100% 100%, 60% 100%);
+  opacity: 1;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.card:hover .card_overlay {
+  opacity: 1;
+  transform: scale(1.05);
+}
+.card_title,
+.card_desc {
+  transition: color 0.3s ease;
+}
+
+.card:hover .card_title {
+  color: #fff;
+}
+
+.card:hover .card_desc {
+  color: #d0d0d0;
+}
+
+.card_title {
+  margin: 5rem 3rem;
+  color: #fff;
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 2.1rem;
+}
+
+.card_desc {
+  color: #838383;
+  padding: 0 3rem;
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 2.4rem;
+}
+
+/* ===== SECTION 3 : Products ===== */
+
+.products {
+  width: 100%;
+  height: 68.8rem;
+  background: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 17.1rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.products_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.products_image {
+  position: absolute;
+  top: 16rem;
+  left: 21.7rem;
+}
+
+.products_img {
+  width: 68.4rem;
+  height: 40.9rem;
+  border-radius: 0.6rem;
+  object-fit: cover;
+}
+
+.products_content {
+  position: absolute;
+  left: 65.5rem;
+  bottom: 16.3rem;
+  width: 67.9rem;
+  height: 42.5rem;
+  background: #fff;
+  padding: 6rem 5.9rem 1.7rem 7rem;
+  border-radius: 0.6rem;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.products_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.products_title {
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 4.8rem;
+  line-height: 6rem;
+
+  color: #000;
+}
+
+.products_arrow {
+  width: 2.2rem;
+  height: 1.7rem;
+  background: none;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.products_arrow:hover {
+  transform: translateX(4px);
+}
+
+.products_text {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 2.4rem;
+  color: #414042;
+}
+
+.products_more {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  color: #000;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.products_more:hover {
+  opacity: 0.7;
+}
+
+.products_counter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  font-family: "Inter";
+  font-size: 1.4rem;
+  color: #000;
+}
+
+.products_progress {
+  width: 24rem;
+  height: 0.2rem;
+  background: #e6e6e6;
+  position: relative;
+}
+
+.products_progress::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20%;
+  height: 100%;
+  background: #000;
+}
+
+/* ==== SECTION 4: PROJECTS ==== */
+
+.projects {
+  padding-right: 12.2rem;
+  background: #ffffff;
+  padding-left: 12.2rem;
+  padding-top: 17.1rem;
+}
+
+.projects_title {
+  font-family: "Inter";
+  margin: 0 0 4rem 0;
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.projects_grid {
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 0 4rem 0;
+  list-style: none;
+  display: grid;
+  padding: 0;
+  gap: 3rem;
+}
+
+.project_card {
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.05);
+  justify-content: space-between;
+  flex-direction: column;
+  border-radius: 0.6rem;
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+}
+
+.project_card img {
+  object-fit: cover;
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.project_info {
+  padding: 2rem 2.5rem;
+}
+
+.project_info h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.project_info p {
+  font-size: 1.5rem;
+  color: #555;
+  margin: 0;
+}
+
+.projects_more {
+  display: inline-block;
+  text-decoration: none;
+  font-family: "Inter";
+  font-size: 1.6rem;
+  line-height: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #000;
+}
+
+.projects_more:hover {
+  text-decoration: underline;
+}
+
+/* ==== SECTION 5: SERVICES ==== */
+
+.ourservice {
+  background: transparent;
+  height: 76.5rem;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.ourservice::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: -1;
+}
+
+.service_content {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 55rem;
+}
+
+.service_label {
+  position: absolute;
+  bottom: 17rem;
+  left: 11.3rem;
+  font-family: "Inter";
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 4.4rem;
+  color: #fff;
+  opacity: 0.9;
+}
+
+.service_heading {
+  font-family: "Inter";
+  font-size: 4.8rem;
+  font-weight: 500;
+  line-height: 6rem;
+  color: #fff;
+}
+
+.service_heading2 {
+  font-size: 3.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.service_text {
+  position: absolute;
+  font-family: "Inter";
+  line-height: 3.4rem;
+  font-weight: 400;
+  max-width: 53rem;
+  font-size: 2rem;
+  opacity: 0.9;
+}
+
+.serviceCounter {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 10%;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.serviceProgress {
+  display: block;
+  width: 24rem;
+  height: 1px;
+  background-color: #fff;
+  opacity: 0.6;
+}
+
+/* .serviceProgress::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20%;
+  height: 100%;
+  background: #fff;
+} */
+
+.servicenumActive {
+  font-family: "Inter";
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.servicenumTotal {
+  font-family: "Inter";
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #fff;
+}

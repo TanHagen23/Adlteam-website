@@ -1,0 +1,101 @@
+networks:
+  default:
+    name: dropin
+    external: true
+
+volumes:
+  green_tech_db:
+    external: true
+  green_tech_images:
+    external: true
+
+services:
+  traefik:
+    image: traefik:v2.9
+    command:
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+
+      - --entrypoints.http.address=:80
+      - --entrypoints.web.forwardedHeaders.trustedIPs=0.0.0.0/0
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  backend:
+    container_name: "backend"
+    restart: always
+    build:
+      context: ../packages/server
+      dockerfile: Dockerfile
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.backend.rule=Host(`${DOMAIN}`) && PathPrefix(`/api`)
+      - traefik.http.services.backend.loadbalancer.server.port=${PORT}
+      - traefik.http.middlewares.api.ratelimit.average=5
+      - traefik.http.middlewares.api.ratelimit.period=1s
+      - traefik.http.middlewares.api.ratelimit.burst=10
+      - traefik.http.middlewares.api.ratelimit.sourceCriterion.requestHeaderName=X-Forwarded-For
+      - traefik.http.routers.backend.middlewares=api
+    environment:
+      PORT: $PORT
+      NODE_ENV: "production"
+      DB_HOST: "database"
+      DB_PORT: 5432
+      DB_USERNAME: $DB_USERNAME
+      DB_PASSWORD: $DB_PASSWORD
+      DB_DATABASE: $DB_DATABASE
+      JWT_ACCESS_SECRET: $JWT_ACCESS_SECRET
+      JWT_REFRESH_SECRET: $JWT_REFRESH_SECRET
+
+    depends_on:
+      - database
+      - traefik
+    volumes:
+      - green_tech_images:/var/www/server/src/uploads
+
+  frontend:
+    container_name: "frontend"
+    restart: always
+    build:
+      context: ../packages/web
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: "production"
+        SERVER_URL: "http://${DOMAIN}"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.frontend.rule=Host(`${DOMAIN}`)
+      - traefik.http.services.frontend.loadbalancer.server.port=80
+    environment:
+      # NODE_ENV: "production"
+      DEBUG: "*"
+    depends_on:
+      - backend
+      - traefik
+
+  # -----------------------------------------------------------
+  #
+  # -----------------------------------------------------------
+
+  database:
+    container_name: database
+    image: "postgres:alpine"
+    environment:
+      POSTGRES_DB: $DB_DATABASE
+      POSTGRES_USER: $DB_USERNAME
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      # PGDATA: "/var/lib/postgresql/data/pgdata"
+    ports:
+      - "$DB_PORT:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d ${DB_DATABASE}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    volumes:
+      - green_tech_db:/var/lib/postgresql/data

@@ -1,0 +1,66 @@
+.header {
+  width: 100%;
+  position: absolute;
+  background: transparent;
+}
+
+.container {
+  height: 9.1rem;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+}
+
+.left {
+  padding-left: 3.4rem;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 9.1rem;
+  height: 4.3rem;
+  object-fit: contain;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navLink {
+  align-items: center;
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin: 5rem;
+  color: #fff;
+  height: 2.1rem;
+  width: 5.1rem;
+  background: transparent;
+  transition: opacity 0.3s ease;
+}
+
+.navLink:hover {
+  color: #00a499;
+}
+
+.tgnumber {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-right: 11.3rem;
+  color: #fff;
+}
+
+.tgnumber i {
+  font-size: 2rem;
+  color: #fff;
+}
